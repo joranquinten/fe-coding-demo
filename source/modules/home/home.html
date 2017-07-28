@@ -1,0 +1,50 @@
+<div id="home" class="row">
+
+  <div class="col-sm-12">
+
+    <h1>Assignment 2.7</h1>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2>Seasonal winners F1 2005 &ndash; 2015</h2>
+      </div>
+      <div class="panel-body">
+
+        <div class="table-responsive" data-ng-if="vm.seasonWinners">
+
+          <table class="table">
+           <tr>
+            <th>Season</th>
+            <th>Round</th>
+            <th>Champion</th>
+            <th>Nationality</th>
+            <th>Constructor</th>
+            <th>Details</th>
+           </tr>
+
+           <tr data-ng-repeat="season in vm.seasonWinners track by $index">
+             <td>{{season.season}}</td>
+             <td>{{season.round}}</td>
+             <td>{{season.fullName}}</td>
+             <td>{{season.nationality}}</td>
+             <td>{{season.constructor}}</td>
+             <td><button class="btn btn-default btn-sm" title="View races for season {{season.season}}" data-ng-click="vm.getRacesBySeason(season.season, season.driverId);"><i  class="fa fa-flag-checkered" aria-hidden="true"></i> Race results</button></td>
+           </tr>
+
+          </table>
+
+        </div>
+
+        <div data-ng-if="!vm.seasonWinners">
+          <p><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Please wait while loading seasons 2005 &ndash; 2015&hellip;</p>
+        </div>
+
+      </div>
+      <div class="panel-footer">
+        <p data-ng-if="vm.seasonWinners">Click on the years to view indivual races. The seasonal champion is marked with a <i  class="fa fa-trophy" aria-hidden="true"></i> symbol.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

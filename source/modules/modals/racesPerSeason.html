@@ -1,0 +1,30 @@
+<div class="modal-header">
+<h3 class="modal-title" id="modal-title">Races per season {{vm.seasonYear}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+
+<div class="table-responsive">
+  <table class="table table-striped" ng-if="vm.seasonRaces">
+   <tr>
+    <th>Round</th>
+    <th>Race</th>
+    <th>Circuit</th>
+    <th>Location</th>
+    <th>Winner</th>
+   </tr>
+
+   <tr data-ng-repeat="races in vm.seasonRaces track by $index" data-ng-class="{ 'seasonalWinner': races.results[0].isSeasonalWinner }">
+    <td>{{races.round}}</td>
+    <td>{{races.raceName}}</td>
+    <td>{{races.circuitName}}</td>
+    <td>{{races.circuitLocation}}</td>
+    <td>{{races.results[0].fullName}} <i data-ng-if="races.results[0].isSeasonalWinner" class="fa fa-trophy" aria-hidden="true"></i></td>
+   </tr>
+
+  </table>
+</div>
+
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary" type="button" ng-click="vm.close()">Close</button>
+</div>
