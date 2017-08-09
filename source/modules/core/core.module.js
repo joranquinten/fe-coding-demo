@@ -9,6 +9,8 @@
   angular
     .module('app.core', [
 
+      'app.sortIndicator',
+
       'ui.router',
       'angular-loading-bar',
       'ui.bootstrap'

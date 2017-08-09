@@ -39,12 +39,12 @@
 
         var beautified = {};
 
-        beautified.season = item.season;
-        beautified.round = item.round;
+        beautified.season = parseInt(item.season); // This is a type number
+        beautified.round = parseInt(item.round); // This is a type number
         beautified.driverId = item.DriverStandings[0].Driver.driverId;
         beautified.fullName = [item.DriverStandings[0].Driver.givenName, item.DriverStandings[0].Driver.familyName].join(' ');
         beautified.nationality = item.DriverStandings[0].Driver.nationality;
-        beautified.constructor = item.DriverStandings[0].Constructors[0].name;
+        beautified.constructorName = item.DriverStandings[0].Constructors[0].name;
 
         return beautified;
 
@@ -69,21 +69,14 @@
         var beautified = {};
 
         beautified.raceName = item.raceName;
-        beautified.round = item.round;
+        beautified.round = parseInt(item.round); // This is a type number
 
         beautified.circuitName = item.Circuit.circuitName;
         beautified.circuitLocation = [item.Circuit.Location.locality, item.Circuit.Location.country].join(', ');
 
-        beautified.results = item.Results.map(function(result) {
-
-          var beautifiedResults = {};
-
-          beautifiedResults.position = result.position;
-          beautifiedResults.fullName = [result.Driver.givenName, result.Driver.familyName].join(' ');
-          beautifiedResults.isSeasonalWinner = (winnerId === result.Driver.driverId); // Register wether the race winner equals the seasonal winner
-
-          return beautifiedResults;
-        }).splice(0,1); // Simply remove all drivers but the winner
+        // Get the winner, which is the first item in the results array
+        beautified.winner = [item.Results[0].Driver.givenName, item.Results[0].Driver.familyName].join(' ');
+        beautified.isSeasonalWinner = (winnerId === item.Results[0].Driver.driverId);
 
         return beautified;
 

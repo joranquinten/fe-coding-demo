@@ -20,16 +20,53 @@
     vm.getSeasonWinners = getSeasonWinners;
     vm.getRacesBySeason = getRacesBySeason;
 
+    vm.orderBy = orderBy;
+    vm.getFilter = getFilter;
+
     init();
 
     ///////////////
 
-    function init () {
+    function init() {
       // Start controller by getting the seasonal winners:
-      getSeasonWinners ();
+      getSeasonWinners();
+
+      // Set initial sort and empty filter:
+      vm.sort = {
+        field: 'season',
+        reverse: false
+      };
+      vm.filter = {};
     }
 
+    ////////////////////
 
+    /*
+
+    Set ordering of the date by columns
+
+    Expects: fieldName
+    Returns: updated sortModel
+
+    */
+
+    function orderBy(field) {
+      vm.sort.field = field;
+      vm.sort.reverse = !vm.sort.reverse;
+    }
+    
+    /*
+
+    Returns the current filter for the view
+
+    Expects: Nothing
+    Returns: updated filter
+
+    */
+
+    function getFilter() {
+      return vm.filter;
+    }
 
     /*
 
@@ -40,12 +77,12 @@
 
     */
 
-    function getSeasonWinners () {
+    function getSeasonWinners() {
 
       $log.debug('getting season winners');
 
       // Make the call to the service:
-      dataService.getSeasonWinners().then(function(response) {
+      dataService.getSeasonWinners().then(function (response) {
 
         // Bind the beautified data to the viewModel:
         vm.seasonWinners = formatService.formatSeasonWinners(response.StandingsTable.StandingsLists);
@@ -69,14 +106,14 @@
 
     */
 
-    function getRacesBySeason (seasonYear, winnerId) {
+    function getRacesBySeason(seasonYear, winnerId) {
 
       vm.selectedSeason = seasonYear;
 
-      $log.debug('getting Races from seasonYear '+ seasonYear);
+      $log.debug('getting Races from seasonYear ' + seasonYear);
 
       // Make the call to the service:
-      dataService.getRacesBySeason(seasonYear).then(function(response) {
+      dataService.getRacesBySeason(seasonYear).then(function (response) {
 
         // Bind the beautified data to the viewModel:
         vm.seasonRaces = formatService.formatRacesBySeason(response.RaceTable.Races, winnerId);
@@ -89,8 +126,12 @@
           controllerAs: 'vm',
           size: 'lg',
           resolve: {
-            seasonYear: function () { return seasonYear; },
-            seasonRaces: function () { return vm.seasonRaces; }
+            seasonYear: function () {
+              return seasonYear;
+            },
+            seasonRaces: function () {
+              return vm.seasonRaces;
+            }
           }
         });
 

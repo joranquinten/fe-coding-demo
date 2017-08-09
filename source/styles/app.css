@@ -2,3 +2,19 @@
   color: #ffd700;
   text-shadow: 0 0 3px #333;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.filter {
+  margin-top: 0.4em;
+  overflow: hidden;
+}
+
+.filter input {
+  width: 100%;
+  font-size: 0.8em;
+  padding: 3px 6px;
+  height: 26px;
+}

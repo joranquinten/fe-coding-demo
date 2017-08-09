@@ -13,23 +13,62 @@
         <div class="table-responsive" data-ng-if="vm.seasonWinners">
 
           <table class="table">
-           <tr>
-            <th>Season</th>
-            <th>Round</th>
-            <th>Champion</th>
-            <th>Nationality</th>
-            <th>Constructor</th>
-            <th>Details</th>
-           </tr>
+            <tr>
+              <th>
+                <span class="clickable" data-ng-click="vm.orderBy('season',false)">
+                Season
+                <sort-indicator field-name="season" active-sort="vm.sort"></sort-indicator>
+              </span>
 
-           <tr data-ng-repeat="season in vm.seasonWinners track by $index">
-             <td>{{season.season}}</td>
-             <td>{{season.round}}</td>
-             <td>{{season.fullName}}</td>
-             <td>{{season.nationality}}</td>
-             <td>{{season.constructor}}</td>
-             <td><button class="btn btn-default btn-sm" title="View races for season {{season.season}}" data-ng-click="vm.getRacesBySeason(season.season, season.driverId);"><i  class="fa fa-flag-checkered" aria-hidden="true"></i> Race results</button></td>
-           </tr>
+                <div class="filter">
+                  <input class="form-control" type="text" ng-model="vm.filter['season']" />
+                </div>
+              </th>
+              <th>
+                <span class="clickable" data-ng-click="vm.orderBy('round',false)">
+                Round
+                <sort-indicator field-name="round" active-sort="vm.sort"></sort-indicator>
+              </span>
+                <div class="filter">
+                  <input class="form-control" type="text" ng-model="vm.filter['round']" />
+                </div>
+              </th>
+              <th>
+                <span class="clickable" data-ng-click="vm.orderBy('fullName',false)">
+                Champion
+                <sort-indicator field-name="fullName" active-sort="vm.sort"></sort-indicator>
+              </span>
+                <div class="filter">
+                  <input class="form-control" type="text" ng-model="vm.filter['fullName']" />
+                </div>
+              </th>
+              <th>
+                <span class="clickable" data-ng-click="vm.orderBy('nationality',false)">Nationality
+              <sort-indicator field-name="nationality" active-sort="vm.sort"></sort-indicator>
+            </span>
+                <div class="filter">
+                  <input class="form-control" type="text" ng-model="vm.filter['nationality']" />
+                </div>
+              </th>
+              <th>
+                <span class="clickable" data-ng-click="vm.orderBy('constructorName',false)">Constructor
+                  <sort-indicator field-name="constructorName" active-sort="vm.sort"></sort-indicator>
+                </span>
+                <div class="filter">
+                  <input class="form-control" type="text" ng-model="vm.filter['constructorName']" />
+                </div>
+              </th>
+              <th>Details</th>
+            </tr>
+
+            <tr data-ng-repeat="season in vm.seasonWinners | orderBy: vm.sort.field : vm.sort.reverse | filter: vm.getFilter() ">
+              <td>{{season.season}}</td>
+              <td>{{season.round}}</td>
+              <td>{{season.fullName}}</td>
+              <td>{{season.nationality}}</td>
+              <td>{{season.constructorName}}</td>
+              <td><button class="btn btn-default btn-sm" title="View races for season {{season.season}}" data-ng-click="vm.getRacesBySeason(season.season, season.driverId);"><i  class="fa fa-flag-checkered" aria-hidden="true"></i> Race results</button></td>
+            </tr>
 
           </table>
 
@@ -41,7 +80,7 @@
 
       </div>
       <div class="panel-footer">
-        <p data-ng-if="vm.seasonWinners">Click on the years to view indivual races. The seasonal champion is marked with a <i  class="fa fa-trophy" aria-hidden="true"></i> symbol.</p>
+        <p data-ng-if="vm.seasonWinners">Click on the years to view indivual races. The seasonal champion is marked with a <i class="fa fa-trophy" aria-hidden="true"></i>          symbol.</p>
       </div>
     </div>
 

@@ -54,7 +54,7 @@ describe('formatService', function() {
                 'driverId',
                 'fullName',
                 'nationality',
-                'constructor'
+                'constructorName'
             ];
 
             props.forEach(function(prop) {
@@ -119,7 +119,8 @@ describe('formatService', function() {
                 'round',
                 'circuitName',
                 'circuitLocation',
-                'results'
+                'winner',
+                'isSeasonalWinner'
             ];
 
             props.forEach(function(prop) {
@@ -127,35 +128,6 @@ describe('formatService', function() {
             });
 
         });
-
-        it('should have an array of results', function() {
-
-            // Target the first occurence of the mockData
-            var formattedData = formatService.formatRacesBySeason(mockData)[0];
-
-            expect(_.isArray(formattedData.results)).toBeTruthy();
-
-        });
-
-        it('should have results wit properties', function() {
-
-            // Target the first occurence of the mockData
-            var formattedData = formatService.formatRacesBySeason(mockData)[0];
-
-            var result = formattedData.results;
-
-            var props = [
-                'position',
-                'fullName',
-                'isSeasonalWinner'
-            ];
-
-            props.forEach(function(prop) {
-                expect(_.has(formattedData.results[0], prop)).toBeTruthy();
-            });
-
-        });
-
     });
 
 });
