@@ -5,6 +5,10 @@ Frontend Developer Demonstration
 
 _"The purpose of this demo is to demonstrate my familiarity with the AngularJS frontend technology, programming patterns and to provide with a sample of what clean and reusable code means to me as a developer."_
 
+The app lists results of the Formula 1 racing seasons from 2005 through 2015. The source of the info is the [Ergast F1 API](http://ergast.com/mrd/). The limited scope of season years and display of the race results force the remapping of the data to a format which is usable in the interface. For every season, the details are accessible via a modal. In the modal the race results per season are listed. The seasonal winner is indicated with a 'trophy' icon, if the seasonal winner is the winner of a race in that season.
+
+Every column is sortable and filterable. Filtering takes place on the retrieved data, no round trips to the API are required.
+
 I have included a global build setup, in order to not only demonstrate my code, but also to give a glimpse of my development process and tools. The optimized output of the files is located in the ./build/ folder, the source originates from the ./source/
 
 ### Installation

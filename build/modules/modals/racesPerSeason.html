@@ -1,0 +1,71 @@
+<div class="modal-header">
+<h3 class="modal-title" id="modal-title">Races per season {{vm.seasonYear}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+
+<div class="table-responsive">
+  <table class="table table-striped" ng-if="vm.seasonRaces">
+   <tr>
+    <th>
+      <span class="clickable" data-ng-click="vm.orderBy('round',false)">
+        Race
+        <sort-indicator field-name="round" active-sort="vm.sort"></sort-indicator>
+      </span>
+      <div class="filter">
+        <input class="form-control" type="text" ng-model="vm.filter['round']" />
+      </div>
+    </th>
+    <th>
+      <span class="clickable" data-ng-click="vm.orderBy('raceName',false)">
+        Name
+        <sort-indicator field-name="raceName" active-sort="vm.sort"></sort-indicator>
+      </span>
+      <div class="filter">
+        <input class="form-control" type="text" ng-model="vm.filter['raceName']" />
+      </div>
+    </th>
+    <th>
+      <span class="clickable" data-ng-click="vm.orderBy('circuitName',false)">
+        Circuit
+        <sort-indicator field-name="circuitName" active-sort="vm.sort"></sort-indicator>
+      </span>
+      <div class="filter">
+        <input class="form-control" type="text" ng-model="vm.filter['circuitName']" />
+      </div>
+    </th>
+    <th>
+      <span class="clickable" data-ng-click="vm.orderBy('circuitLocation',false)">
+        Location
+        <sort-indicator field-name="circuitLocation" active-sort="vm.sort"></sort-indicator>
+      </span>
+      <div class="filter">
+        <input class="form-control" type="text" ng-model="vm.filter['circuitLocation']" />
+      </div>
+
+    </th>
+    <th>
+      <span class="clickable" data-ng-click="vm.orderBy('winner',false)">
+        Winner
+        <sort-indicator field-name="winner" active-sort="vm.sort"></sort-indicator>
+      </span>
+      <div class="filter">
+        <input class="form-control" type="text" ng-model="vm.filter['winner']" />
+      </div>
+    </th>
+   </tr>
+
+   <tr data-ng-repeat="races in vm.seasonRaces | orderBy: vm.sort.field : vm.sort.reverse | filter: vm.getFilter() " data-ng-class="{ 'seasonalWinner': races.isSeasonalWinner }">
+    <td>{{races.round}}</td>
+    <td>{{races.raceName}}</td>
+    <td>{{races.circuitName}}</td>
+    <td>{{races.circuitLocation}}</td>
+    <td>{{races.winner}} <i data-ng-if="races.isSeasonalWinner" class="fa fa-trophy" aria-hidden="true"></i></td>
+   </tr>
+
+  </table>
+</div>
+
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary" type="button" ng-click="vm.close()">Close</button>
+</div>
